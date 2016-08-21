@@ -23,6 +23,8 @@ RUN yum install -y http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-cento
     openssl-devel \
     postgresql95-devel \
     python-devel \
+    xrg-x11-server-Xvfb \
+    firefox \
     && yum clean all
 
 ENV PATH /usr/pgsql-9.5/bin:$PATH
