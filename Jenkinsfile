@@ -8,7 +8,7 @@ node {
     stage 'Build'
 
     def imagename = newImageTag('bccvl/bccvlbase')
-    def img = docker.build(imagename)
+    def img = docker.build(imagename, '--pull --no-cache .')
 
     // publish image to registry
     stage 'Publish'
