@@ -1,4 +1,10 @@
-FROM hub.bccvl.org.au/centos/centos7-epel:2016-08-21
+FROM hub.bccvl.org.au/centos/centos7-epel:2017-02-20
+
+# configure pypi index to use
+ARG PIP_INDEX_URL
+ARG PIP_TRUSTED_HOST
+# If set, pip will look for pre releases
+ARG PIP_PRE
 
 RUN yum install -y http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm \
     && yum install -y \
@@ -23,10 +29,21 @@ RUN yum install -y http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-cento
     openssl-devel \
     postgresql95-devel \
     python-devel \
+
+# TODO: maybe split all below out into a jenkins specific base build/test image
+
     xorg-x11-server-Xvfb \
     firefox \
     which \
     git \
     && yum clean all
+
+RUN export PIP_INDEX_URL=${PIP_INDEX_URL} && \
+    export PIP_TRUSTED_HOST=${PIP_TRUSTED_HOST} && \
+    export PIP_NO_CACHE_DIR=False && \
+    export PIP_PRE=${PIP_PRE} && \
+    easy_install pip && \
+    pip install --upgrade setuptools && \
+    pip install guscmversion
 
 ENV PATH /usr/pgsql-9.5/bin:$PATH
