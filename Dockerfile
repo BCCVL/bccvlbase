@@ -43,8 +43,7 @@ RUN export PIP_INDEX_URL=${PIP_INDEX_URL} && \
     export PIP_NO_CACHE_DIR=False && \
     export PIP_PRE=${PIP_PRE} && \
     easy_install pip && \
-    pip install --upgrade setuptools && \
-    pip install wheel && \
+    pip install --upgrade setuptools wheel virtualenv && \
     pip install guscmversion
 
 ENV PATH /usr/pgsql-9.5/bin:$PATH
