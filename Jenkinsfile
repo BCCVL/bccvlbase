@@ -14,7 +14,7 @@ node ('docker') {
         withCredentials([string(credentialsId: 'pypi_index_url_prod', variable: 'PYPI_INDEX_URL')]) {
             docker.withRegistry('https://hub.bccvl.org.au', 'hub.bccvl.org.au') {
                 imagename = "hub.bccvl.org.au/bccvl/bccvlbase:${dateTag()}"
-                img = docker.build(imagename, "--pull --no-cache --build-arg PIP_INDEX_URL=${INDEX_URL} . ")
+                img = docker.build(imagename, "--pull --no-cache --build-arg PIP_INDEX_URL=${PYPI_INDEX_URL} . ")
             }
         }
 
