@@ -36,7 +36,7 @@ RUN yum install -y http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-cento
         git \
     && yum clean all \
     && curl -SLs https://github.com/mozilla/geckodriver/releases/download/v0.14.0/geckodriver-v0.14.0-linux64.tar.gz | tar -zxvf - -C /usr/local/bin \
-    && curl https://bootstrap.pypa.io/get-pip.py | sudo python -
+    && curl https://bootstrap.pypa.io/get-pip.py | python -
 
 # Manually Install GDAL and newer version of numpy
 # libarmadillo adds a a number of dependencies: arpack-devel, atlas-devel, blas-devel, lapack-devel, libquadmath-devel, gcc-fortran
