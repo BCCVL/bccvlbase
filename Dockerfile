@@ -1,4 +1,4 @@
-FROM hub.bccvl.org.au/centos/centos7-epel:2017-02-20
+FROM hub.bccvl.org.au/centos/centos7-epel:2017-05-22
 
 # configure pypi index to use
 ARG PIP_INDEX_URL
@@ -34,16 +34,9 @@ RUN yum install -y http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-cento
         firefox \
         which \
         git \
-        && yum clean all \
-        && curl -SLs https://github.com/mozilla/geckodriver/releases/download/v0.14.0/geckodriver-v0.14.0-linux64.tar.gz | tar -zxvf - -C /usr/local/bin
-
-RUN export PIP_INDEX_URL=${PIP_INDEX_URL} && \
-    export PIP_TRUSTED_HOST=${PIP_TRUSTED_HOST} && \
-    export PIP_NO_CACHE_DIR=False && \
-    export PIP_PRE=${PIP_PRE} && \
-    easy_install pip && \
-    pip install --upgrade setuptools wheel virtualenv && \
-    pip install guscmversion
+    && yum clean all \
+    && curl -SLs https://github.com/mozilla/geckodriver/releases/download/v0.14.0/geckodriver-v0.14.0-linux64.tar.gz | tar -zxvf - -C /usr/local/bin \
+    && curl https://bootstrap.pypa.io/get-pip.py | sudo python -
 
 # Manually Install GDAL and newer version of numpy
 # libarmadillo adds a a number of dependencies: arpack-devel, atlas-devel, blas-devel, lapack-devel, libquadmath-devel, gcc-fortran
@@ -52,7 +45,7 @@ RUN export PIP_INDEX_URL=${PIP_INDEX_URL} && \
     export PIP_NO_CACHE_DIR=False && \
     export PIP_PRE=${PIP_PRE} && \
     export GDAL_VERSION="2.2.0" && \
-    pip install --no-cache-dir numpy cryptography && \
+    pip install --no-cache-dir guscmversion numpy cryptography && \
     `# install build edpendencies:` && \
     yum install -y \
         make \
