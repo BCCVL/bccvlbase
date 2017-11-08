@@ -1,4 +1,4 @@
-FROM hub.bccvl.org.au/centos/centos7-epel:2017-05-22
+FROM hub.bccvl.org.au/centos/centos7-epel:2017-10-16
 
 # configure pypi index to use
 ARG PIP_INDEX_URL
