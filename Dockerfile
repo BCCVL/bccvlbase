@@ -6,7 +6,7 @@ ARG PIP_TRUSTED_HOST
 # If set, pip will look for pre releases
 ARG PIP_PRE
 
-RUN yum install -y http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm \
+RUN yum install -y http://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm \
     && yum install -y \
         exempi-devel \
         freetype-devel \
@@ -25,7 +25,7 @@ RUN yum install -y http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-cento
         mailcap \
         openjpeg-devel \
         openssl-devel \
-        postgresql95-devel \
+        postgresql10-devel \
         python-devel \
 
 # TODO: maybe split all below out into a jenkins specific base build/test image
@@ -44,7 +44,7 @@ RUN export PIP_INDEX_URL=${PIP_INDEX_URL} && \
     export PIP_TRUSTED_HOST=${PIP_TRUSTED_HOST} && \
     export PIP_NO_CACHE_DIR=False && \
     export PIP_PRE=${PIP_PRE} && \
-    export GDAL_VERSION="2.2.0" && \
+    export GDAL_VERSION="2.2.3" && \
     pip install --no-cache-dir virtualenv guscmversion numpy cryptography && \
     `# install build edpendencies:` && \
     yum install -y \
@@ -90,4 +90,4 @@ RUN export PIP_INDEX_URL=${PIP_INDEX_URL} && \
     yum remove -y $buildDeps && \
     yum clean all
 
-ENV PATH /usr/pgsql-9.5/bin:$PATH
+ENV PATH /usr/pgsql-10/bin:$PATH
