@@ -85,11 +85,12 @@ RUN export PIP_INDEX_URL=${PIP_INDEX_URL} && \
 ENV PATH /usr/pgsql-10/bin:$PATH
 
 # TODO: maybe split all below out into a jenkins specific base build/test image
+# last geckodriver version to work with firefox 52 (centos release)
 RUN yum install -y \
         xorg-x11-server-Xvfb \
         firefox \
         which \
         git \
     && yum clean all \
-    && curl -SLs https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz | tar -zxvf - -C /usr/local/bin
+    && curl -SLs https://github.com/mozilla/geckodriver/releases/download/v0.17.0/geckodriver-v0.17.0-linux64.tar.gz | tar -zxvf - -C /usr/local/bin
 
