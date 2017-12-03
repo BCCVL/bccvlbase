@@ -27,15 +27,7 @@ RUN yum install -y http://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos
         openssl-devel \
         postgresql10-devel \
         python-devel \
-
-# TODO: maybe split all below out into a jenkins specific base build/test image
-
-        xorg-x11-server-Xvfb \
-        firefox \
-        which \
-        git \
     && yum clean all \
-    && curl -SLs https://github.com/mozilla/geckodriver/releases/download/v0.14.0/geckodriver-v0.14.0-linux64.tar.gz | tar -zxvf - -C /usr/local/bin \
     && curl https://bootstrap.pypa.io/get-pip.py | python -
 
 # Manually Install GDAL and newer version of numpy
@@ -91,3 +83,13 @@ RUN export PIP_INDEX_URL=${PIP_INDEX_URL} && \
     yum clean all
 
 ENV PATH /usr/pgsql-10/bin:$PATH
+
+# TODO: maybe split all below out into a jenkins specific base build/test image
+RUN yum install -y \
+        xorg-x11-server-Xvfb \
+        firefox \
+        which \
+        git \
+    && yum clean all \
+    && curl -SLs https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz | tar -zxvf - -C /usr/local/bin
+
