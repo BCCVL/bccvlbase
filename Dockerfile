@@ -94,3 +94,8 @@ RUN yum install -y \
     && yum clean all \
     && curl -SLs https://github.com/mozilla/geckodriver/releases/download/v0.17.0/geckodriver-v0.17.0-linux64.tar.gz | tar -zxvf - -C /usr/local/bin
 
+# install nodejs
+RUN curl --silent --location https://rpm.nodesource.com/setup_8.x | bash - \
+ && yum install -y nodejs \
+ && yum clean all
+
